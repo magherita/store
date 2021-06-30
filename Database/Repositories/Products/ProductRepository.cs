@@ -15,37 +15,22 @@ namespace Database.Repositories.Products
         private readonly StoreContext _context;
         public ProductRepository(StoreContext context)
         {
-            this._context = context;
+            _context = context;
         }
 
 
-
-        /*
-        private readonly StoreContext _context;
-
-        public ProductRepository (StoreContext context)
-	    {
-            this._context = context; 
-	    }
-
-        public Task CreateProductAsync(Product product, CancellationToken cancellationToken = default)
+        public async Task CreateProductAsync(Product product, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
-        }
+            await _context.AddAsync(new Product { });
 
-        public Task CreateProductAsync(Product product, CancellationToken cancellationToken = default)
-        {
-            throw new NotImplementedException();
+            await _context.SaveChangesAsync(cancellationToken);
         }
 
         public void DeleteProductAsync(Product product)
         {
-            throw new NotImplementedException();
-        }
+            _context.Products.Remove(product);
 
-        public void DeleteProductAsync(Product product)
-        {
-            throw new NotImplementedException();
+            _context.SaveChanges();
         }
 
         public Task<Product> RetrieveProductAsync(Guid id, CancellationToken cancellationToken = default)
@@ -58,49 +43,11 @@ namespace Database.Repositories.Products
             throw new NotImplementedException();
         }
 
-        public Task<Product> RetrieveProductAsync(Guid id, CancellationToken cancellationToken = null)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<Product>> RetrieveProductAsync(CancellationToken cancellationToken = null)
-        {
-            throw new NotImplementedException();
-        }
-
         public void UpdateProductAsync(Product product)
         {
-            throw new NotImplementedException();
-        }
+            _context.Products.Update(product);
 
-        public void UpdateProductAsync(Product product)
-        {
-            throw new NotImplementedException();
-        }
-        */
-        public Task CreateProductAsync(Product product, CancellationToken cancellationToken = null)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DeleteProductAsync(Product product)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Product> RetrieveProductAsync(Guid id, CancellationToken cancellationToken = null)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<Product>> RetrieveProductAsync(CancellationToken cancellationToken = null)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateProductAsync(Product product)
-        {
-            throw new NotImplementedException();
+            _context.SaveChanges();
         }
     }
 }
