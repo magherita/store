@@ -12,7 +12,7 @@ namespace Database.Repositories.LineItems
     {
         // Define Product CRUD methods.
        
-        Task CreateLineItem(LineItem lineItem, CancellationToken cancellationToken = default);
+        Task CreateLineItemAsync(LineItem lineItem, CancellationToken cancellationToken = default);
 
         Task<LineItem> RetrieveLineItemAsync(Guid id, CancellationToken cancellationToken = default);
 
