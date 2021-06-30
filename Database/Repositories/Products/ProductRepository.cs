@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Database.Configurations;
+using Domain.Products;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Database.Repositories.Products
@@ -10,25 +13,39 @@ namespace Database.Repositories.Products
     {
 
         private readonly StoreContext _context;
+        public ProductRepository(StoreContext context)
+        {
+            this._context = context;
+        }
+
+
+
+        /*
+        private readonly StoreContext _context;
 
         public ProductRepository (StoreContext context)
 	    {
             this._context = context; 
 	    }
 
-        public async Task CreateProductAsync(Product  product, CancellationToken cancellationToken = default)
+        public Task CreateProductAsync(Product product, CancellationToken cancellationToken = default)
         {
-           await _context.Products.AddAsync(product);
-
-            await _context.SaveChangesAsync(cancellationToken);
+            throw new NotImplementedException();
         }
 
-
-        public Task DeleteProduct(Product product, CancellationToken cancellationToken = default)
+        public Task CreateProductAsync(Product product, CancellationToken cancellationToken = default)
         {
-            _context.Remove(product);
+            throw new NotImplementedException();
+        }
 
+        public void DeleteProductAsync(Product product)
+        {
+            throw new NotImplementedException();
+        }
 
+        public void DeleteProductAsync(Product product)
+        {
+            throw new NotImplementedException();
         }
 
         public Task<Product> RetrieveProductAsync(Guid id, CancellationToken cancellationToken = default)
@@ -41,7 +58,47 @@ namespace Database.Repositories.Products
             throw new NotImplementedException();
         }
 
-        public Task UpdateProductAsync(Product product, CancellationToken cancellationToken = default)
+        public Task<Product> RetrieveProductAsync(Guid id, CancellationToken cancellationToken = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<Product>> RetrieveProductAsync(CancellationToken cancellationToken = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateProductAsync(Product product)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateProductAsync(Product product)
+        {
+            throw new NotImplementedException();
+        }
+        */
+        public Task CreateProductAsync(Product product, CancellationToken cancellationToken = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteProductAsync(Product product)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Product> RetrieveProductAsync(Guid id, CancellationToken cancellationToken = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<Product>> RetrieveProductAsync(CancellationToken cancellationToken = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateProductAsync(Product product)
         {
             throw new NotImplementedException();
         }
