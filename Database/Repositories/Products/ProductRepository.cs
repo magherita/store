@@ -1,5 +1,6 @@
 ﻿using Database.Configurations;
 using Domain.Products;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,14 +34,14 @@ namespace Database.Repositories.Products
             _context.SaveChanges();
         }
 
-        public Task<Product> RetrieveProductAsync(Guid id, CancellationToken cancellationToken = default)
+        public async Task<Product> RetrieveProductAsync(Guid id, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            return await _context.Products.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
         }
 
-        public Task<List<Product>> RetrieveProductAsync(CancellationToken cancellationToken = default)
+        public async Task<List<Product>> RetrieveProductAsync(CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            return await _context.Products.ToListAsync(cancellationToken);
         }
 
         public void UpdateProductAsync(Product product)
