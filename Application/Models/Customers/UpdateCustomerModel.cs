@@ -4,7 +4,8 @@ using System.Text;
 
 namespace Application.Models.Customers
 {
-    class UpdateCustomerModel
+    public class UpdateCustomerModel : CustomerModel
     {
+        
     }
 }

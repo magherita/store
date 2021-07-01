@@ -4,7 +4,8 @@ using System.Text;
 
 namespace Application.Models.Customers
 {
-    class DeleteCustomerModel
+    public class DeleteCustomerModel
     {
+        public Guid Id { get; set; }
     }
 }

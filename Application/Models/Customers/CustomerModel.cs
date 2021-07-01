@@ -4,7 +4,12 @@ using System.Text;
 
 namespace Application.Models.Customers
 {
-    class CustomerModel
+    public class CustomerModel
     {
+        public Guid Id { get; set; }
+
+        public string Name { get; set; }
+
+        public string Address { get; set; }
     }
 }

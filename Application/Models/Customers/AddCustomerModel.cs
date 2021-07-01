@@ -4,7 +4,10 @@ using System.Text;
 
 namespace Application.Models.Customers
 {
-    class AddCustomerModel
+    public class AddCustomerModel
     {
+        public string Name { get; set; }
+
+        public string Address { get; set; }
     }
 }
