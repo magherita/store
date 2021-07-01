@@ -1,11 +1,12 @@
 ﻿using Domain.Orders;
 using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Application.Models.Orders
 {
-    public class OrderModel
+    class AddOrderModel
     {
-        public Guid Id { get; set; }
         public double Total { get; set; }
         public OrderStatus Status { get; set; }
         public Guid CustomerId { get; set; }
