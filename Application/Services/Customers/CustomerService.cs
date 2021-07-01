@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Application.Models.Customers;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Application.Services.Customers
 {
-    class CustomerService
+    public class CustomerService : ICustomerServices
     {
+        
     }
 }
