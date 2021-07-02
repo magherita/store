@@ -14,7 +14,7 @@ namespace Application.Services.Orders
 
         Task DeleteModelAsync(DeleteOrderModel model, CancellationToken cancellationToken = default);
 
-        Task<OrderModel> GetOrderModelAsync(Guid orderId, CancellationToken cancellationToken = default);
+        Task<OrderModel> GetOrderAsync(Guid orderId, CancellationToken cancellationToken = default);
 
         Task<List<OrderModel>> GetOrderModelListAsync(CancellationToken cancellationToken = default);
        

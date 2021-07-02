@@ -27,7 +27,7 @@ namespace Database.Repositories.Products
             await _context.SaveChangesAsync(cancellationToken);
         }
 
-        public void DeleteProductAsync(Product product)
+        public void DeleteProduct(Product product)
         {
             _context.Products.Remove(product);
 
@@ -44,7 +44,7 @@ namespace Database.Repositories.Products
             return await _context.Products.ToListAsync(cancellationToken);
         }
 
-        public void UpdateProductAsync(Product product)
+        public void UpdateProduct(Product product)
         {
             _context.Products.Update(product);
 

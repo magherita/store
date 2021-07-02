@@ -45,7 +45,7 @@ namespace Application.Services.Orders
            
         }
 
-        public async Task DeleteModelAsync(DeleteOrderModel model)
+        public async Task DeleteModelAsync(DeleteOrderModel model, CancellationToken cancellationToken = default)
         {
             // Ensure the model is not null.
             if ( model == null)
@@ -65,7 +65,9 @@ namespace Application.Services.Orders
             _orderRepository.DeleteOrder(order);
         }
 
-        public async Task<OrderModel> GetOrderModelAsync(Guid orderId, CancellationToken cancellationToken = default)
+      
+
+        public async Task<OrderModel> GetOrderAsync(Guid orderId, CancellationToken cancellationToken = default)
         {
             // Get order from the database
             var order = await _orderRepository.RetrieveOrderAsync(orderId, cancellationToken);
@@ -110,7 +112,7 @@ namespace Application.Services.Orders
             return models;
         }
 
-        public async OrderModel UpdateOrderAsync(UpdateOrderModel model, CancellationToken cancellationToken = default)
+        public async Task<OrderModel> UpdateOrderAsync(UpdateOrderModel model, CancellationToken cancellationToken = default)
         {
             // Verify the order exist in the datatbase
             var order = await _orderRepository.RetrieveOrderAsync(model.Id, cancellationToken);
@@ -132,7 +134,10 @@ namespace Application.Services.Orders
             _orderRepository.UpdateOrder(order);
 
 
-            return new OrderModel 
+
+
+
+            return new OrderModel
             {
                 Id = order.Id,
                 Total = order.Total,
@@ -140,5 +145,7 @@ namespace Application.Services.Orders
                 CustomerId = order.CustomerId
             };
         }
+
+        
     }
 }

@@ -17,9 +17,9 @@ namespace Database.Repositories.Products
 
         Task<List<Product>> RetrieveProductAsync(CancellationToken cancellationToken = default);
 
-        void UpdateProductAsync(Product product);
+        void UpdateProduct(Product product);
 
-        void DeleteProductAsync(Product product);
+        void DeleteProduct(Product product);
     
     }
 }
