@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Application.Models.LineItems
 {
-    class DeleteLineItemModel
+    public class DeleteLineItemModel
     {
         public Guid Id { get; set; }
     }

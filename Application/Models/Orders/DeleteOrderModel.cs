@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Application.Models.Orders
 {
-    class DeleteOrderModel
+    public class DeleteOrderModel
     {
         public Guid Id { get; set; }
     }

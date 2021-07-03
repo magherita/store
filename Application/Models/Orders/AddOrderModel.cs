@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Application.Models.Orders
 {
-    class AddOrderModel
+    public class AddOrderModel
     {
         public double Total { get; set; }
         public OrderStatus Status { get; set; }

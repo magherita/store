@@ -64,7 +64,6 @@ namespace Application.Services.Products
         {
             var product = await _productRepository.RetrieveSignleProductAsync(productId, cancellationToken);
 
-            // ensure the customer is not null
             if (product == null)
             {
                 throw new Exception($"No product was found in the database with id {productId}!");

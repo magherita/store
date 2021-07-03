@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Application.Models.LineItems
 {
-    class LineItemModel
+    public class LineItemModel
     {
         public Guid Id { get; set; }
         public int Quantity { get; set; }
