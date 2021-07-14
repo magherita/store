@@ -44,7 +44,7 @@ namespace Database.Repositories.LineItems
                .FirstOrDefaultAsync(cancellationToken);
         }
 
-        public async Task<List<LineItem>> RetrieveLineItemAsync(CancellationToken cancellationToken = default)
+        public async Task<List<LineItem>> RetrieveLineItemsAsync(CancellationToken cancellationToken = default)
         {
             return await _context.LineItems.ToListAsync(cancellationToken);
         }

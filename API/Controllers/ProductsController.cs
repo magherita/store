@@ -11,11 +11,11 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductController : ControllerBase
+    public class ProductsController : ControllerBase
     {
         private readonly IProductService _productService;
 
-        public ProductController(IProductService productService)
+        public ProductsController(IProductService productService)
         {
             _productService = productService;
         }
@@ -30,7 +30,7 @@ namespace API.Controllers
                 value: model);
         }
 
-        [HttpGet("{customerId:Guid}")]
+        [HttpGet("{productId:Guid}")]
         public async Task<ActionResult<ProductModel>> GetAsync([FromRoute] Guid productId)
         {
             var model = await _productService.GetProductAsync(productId);

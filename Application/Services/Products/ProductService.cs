@@ -38,7 +38,7 @@ namespace Application.Services.Products
             // create and save the Product
             await _productRespository.CreateProductAsync(product, cancellationToken);
 
-            // customer has been saved
+            // product has been saved
             // map product to product model and return
             return new ProductModel
             {

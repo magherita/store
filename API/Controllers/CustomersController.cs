@@ -22,6 +22,11 @@ namespace API.Controllers
             _customerService = customerService;
         }
 
+        /// <summary>
+        /// Add an Order
+        /// </summary>
+        /// <param name="payload"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult<CustomerModel>> PostAsync([FromBody] AddCustomerModel payload)
         {
@@ -47,7 +52,7 @@ namespace API.Controllers
 
             return Ok(models);
         }
-
+ 
         [HttpPut("{customerId:Guid}")]
         public async Task<ActionResult<CustomerModel>> PutAsync(
             [FromRoute] Guid customerId,

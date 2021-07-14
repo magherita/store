@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Application.Models.LineItems
 {
-    public class UpdateLineModel
+    public class UpdateLineItemModel : LineItemModel
     {
 
     }

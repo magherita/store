@@ -6,5 +6,6 @@ namespace Application.Models.LineItems
 {
     public class DeleteLineItemModel
     {
+        public Guid Id { get; set; }
     }
 }

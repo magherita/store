@@ -11,6 +11,10 @@ namespace Application.Models.Orders
 
         public OrderStatus Status { get; set; }
 
-        
+        public Guid CustomerId { get; set; }
+
+        public List<LineItem> LineItems { get; set; }
+
+
     }
 }

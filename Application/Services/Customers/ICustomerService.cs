@@ -17,7 +17,7 @@ namespace Application.Services.Customers
             CancellationToken cancellationToken = default);
 
         Task DeleteCustomerAsync(
-            DeleteCustomerModel model, 
+            DeleteCustomerModel model,  
             CancellationToken cancellationToken = default);
 
         Task<CustomerModel> GetCustomerAsync(

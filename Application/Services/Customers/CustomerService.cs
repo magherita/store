@@ -1,4 +1,5 @@
 ﻿using Application.Models.Customers;
+using AutoMapper;
 using Database.Repositories.Customers;
 using Domain.Customers;
 using System;
@@ -11,10 +12,12 @@ namespace Application.Services.Customers
     public class CustomerService : ICustomerService
     {
         private readonly ICustomerRepository _customerRepository;
+        private readonly IMapper _mapper;
 
-        public CustomerService(ICustomerRepository customerRepository)
+        public CustomerService(ICustomerRepository customerRepository, IMapper mapper)
         {
             _customerRepository = customerRepository;
+            _mapper = mapper;
         }
 
         public async Task<CustomerModel> AddCustomerAsync(
@@ -22,29 +25,38 @@ namespace Application.Services.Customers
             CancellationToken cancellationToken = default)
         {
             // ensure the model is not null
-            if (model == null)
-            {
-                throw new Exception("No customer details were provided!");
-            }
+            //if (model == null)
+            //{
+            //    throw new Exception("No customer details were provided!");
+            //}
 
             // map model to the customer domain
-            var customer = new Customer
-            { 
-                Name = model.Name,
-                Address = model.Address
-            };
+            //var customer = new Customer
+            //{ 
+            //    Name = model.Name,
+            //    Address = model.Address
+            //};
+
+            //Another way of mapping
+            var customer = _mapper.Map<Customer>(model);
+
+     
 
             // create and save customer
             await _customerRepository.CreateCustomerAsync(customer, cancellationToken);
 
             // customer has been saved
             // map customer to customer model and return
-            return new CustomerModel
-            { 
-                Id = customer.Id,
-                Name = customer.Name,
-                Address = customer.Address
-            };
+            //return new CustomerModel
+            //{ 
+            //    Id = customer.Id,
+            //    Name = customer.Name,
+            //    Address = customer.Address
+            //};
+
+            var customerModel = _mapper.Map<CustomerModel>(customer);
+
+            return customerModel;
         }
 
         public async Task DeleteCustomerAsync(
@@ -84,12 +96,16 @@ namespace Application.Services.Customers
             }
 
             // map customer to the customer model
-            return new CustomerModel
-            { 
-                Id = customer.Id,
-                Name = customer.Name,
-                Address = customer.Address
-            };
+            //return new CustomerModel
+            //{ 
+            //    Id = customer.Id,
+            //    Name = customer.Name,
+            //    Address = customer.Address
+            //};
+
+
+            var customerModel = _mapper.Map<CustomerModel>(customer);
+            return customerModel;
         }
 
         public async Task<List<CustomerModel>> GetCustomerListAsync(
@@ -99,19 +115,21 @@ namespace Application.Services.Customers
             var customers = await _customerRepository.RetrieveCustomersAsync(cancellationToken);
 
             // map customer list to customer model list
-            var models = new List<CustomerModel>();
+            //var models = new List<CustomerModel>();
 
-            foreach (var customer in customers)
-            {
-                var model = new CustomerModel
-                {
-                    Id = customer.Id,
-                    Name = customer.Name,
-                    Address = customer.Address
-                };
+            //foreach (var customer in customers)
+            //{
+            //    var model = new CustomerModel
+            //    {
+            //        Id = customer.Id,
+            //        Name = customer.Name,
+            //        Address = customer.Address
+            //    };
 
-                models.Add(model);
-            }
+            //    models.Add(model);
+            //}
+
+            var models = _mapper.Map<List<CustomerModel>>(customers);
 
             return models;
         }
@@ -136,12 +154,15 @@ namespace Application.Services.Customers
             // update the customer in the database
             _customerRepository.UpdateCustomer(customer);
 
-            return new CustomerModel
-            { 
-                Id = customer.Id,
-                Name = customer.Name,
-                Address = customer.Address
-            };
+            //return new CustomerModel
+            //{ 
+            //    Id = customer.Id,
+            //    Name = customer.Name,
+            //    Address = customer.Address
+            //};
+
+            var customerModel = _mapper.Map<CustomerModel>(customer);
+            return customerModel;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Domain.Orders;
+﻿using Application.Models.LineItems;
+using Domain.Orders;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,5 +15,7 @@ namespace Application.Models.Orders
         public OrderStatus Status { get; set; }
 
         public Guid CustomerId { get; set; }
+
+        public List<LineItemModel> LineItems { get; set; }
     }
 }

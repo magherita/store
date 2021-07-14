@@ -16,7 +16,7 @@ namespace Database.Repositories.LineItems
 
         Task<LineItem> RetrieveLineItemAsync(Guid id, CancellationToken cancellationToken = default);
 
-        Task<List<LineItem>> RetrieveLineItemAsync(CancellationToken cancellationToken = default);
+        Task<List<LineItem>> RetrieveLineItemsAsync(CancellationToken cancellationToken = default);
 
         void UpdateLineItem(LineItem lineItem);
 

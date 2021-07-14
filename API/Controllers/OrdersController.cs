@@ -20,8 +20,8 @@ namespace API.Controllers
             _orderService = orderService;
         }
 
-        // Get The order
-        [HttpGet("{id:Guid}")]
+        // Get The Single order
+        [HttpGet("{orderId:Guid}")]
         public async Task<ActionResult<OrderModel>> GetAsync([FromRoute] Guid orderId)
         {
             var model = await _orderService.GetOrderAsync(orderId);
@@ -52,7 +52,7 @@ namespace API.Controllers
                 value: model);
         }
 
-        [HttpPut("{orderId: Guid}")]
+        [HttpPut("{orderId:Guid}")]
         public async Task<ActionResult<OrderModel>> PutAsync([FromRoute] Guid orderId, [FromBody] UpdateOrderModel payload)
         {
             payload.Id = orderId;
@@ -62,10 +62,10 @@ namespace API.Controllers
             return Ok(model);
         }
 
-        [HttpDelete("{orderId: Guid}")]
-        public async Task<ActionResult> DeleteAsync([FromRoute] Guid orderId, DeleteOrderModel payload) 
+        [HttpDelete("{orderId:Guid}")]
+        public async Task<ActionResult> DeleteAsync([FromRoute] Guid orderId) 
         {
-            payload.Id = orderId;
+            var payload = new DeleteOrderModel { Id = orderId };
 
             await _orderService.DeleteModelAsync(payload);
 

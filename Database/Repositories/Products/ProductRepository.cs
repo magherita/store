@@ -22,7 +22,7 @@ namespace Database.Repositories.Products
 
         public async Task CreateProductAsync(Product product, CancellationToken cancellationToken = default)
         {
-            await _context.AddAsync(new Product { });
+            await _context.AddAsync(product);
 
             await _context.SaveChangesAsync(cancellationToken);
         }
