@@ -29,14 +29,19 @@ namespace Database.Repositories.Orders
             _context.SaveChanges();
         }
 
+        public async Task<Order> RetrieveCustomerOrderAsync(Guid customerId, CancellationToken cancellationToken = default)
+        {
+            return await _context.Orders.Include(x => x.LineItems).Include(x => x.Customer).FirstOrDefaultAsync(x => x.CustomerId == customerId, cancellationToken);
+        }
+
         public async Task<List<Order>> RetrieveOrdersAsync(CancellationToken cancellationToken = default)
         {
-            return await _context.Orders.ToListAsync(cancellationToken);
+            return await _context.Orders.Include(x => x.LineItems ).ToListAsync(cancellationToken);
         }
 
         public async Task<Order> RetrieveSingleOrderAsync(Guid Id, CancellationToken cancellationToken = default)
         {
-            return await _context.Orders.FirstOrDefaultAsync(x => x.Id == Id, cancellationToken);
+            return await _context.Orders.Include(x => x.LineItems).FirstOrDefaultAsync(x => x.Id == Id, cancellationToken);
         }
 
         public void UpdateOrder(Order order)

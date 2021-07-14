@@ -1,5 +1,7 @@
-﻿using Domain.Orders;
+﻿using Application.Models.LineItems;
+using Domain.Orders;
 using System;
+using System.Collections.Generic;
 
 namespace Application.Models.Orders
 {
@@ -9,5 +11,6 @@ namespace Application.Models.Orders
         public double Total { get; set; }
         public OrderStatus Status { get; set; }
         public Guid CustomerId { get; set; }
+        public List<LineItemModel> LineItems { get; set; }
     }
 }

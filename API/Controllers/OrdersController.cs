@@ -18,7 +18,11 @@ namespace API.Controllers
         {
             _orderService = orderService;
         }
-
+        /// <summary>
+        /// Add an order
+        /// </summary>
+        /// <param name="payload"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult<OrderModel>> PostAsync([FromBody] AddOrderModel payload)
         {

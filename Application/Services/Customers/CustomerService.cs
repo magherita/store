@@ -47,6 +47,7 @@ namespace Application.Services.Customers
             };
         }
 
+
         public async Task DeleteCustomerAsync(
             DeleteCustomerModel model, 
             CancellationToken cancellationToken = default)

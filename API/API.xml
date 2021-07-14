@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>API</name>
+    </assembly>
+    <members>
+        <member name="M:API.Controllers.OrdersController.PostAsync(Application.Models.Orders.AddOrderModel)">
+            <summary>
+            Add an order
+            </summary>
+            <param name="payload"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

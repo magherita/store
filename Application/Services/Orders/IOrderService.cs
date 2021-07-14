@@ -24,5 +24,7 @@ namespace Application.Services.Orders
             CancellationToken cancellationToken = default);
 
         Task<List<OrderModel>> GetOrderListAsync(CancellationToken cancellationToken = default);
+
+        Task<OrderModel> GetCustomerOrderAsync(Guid customerId, CancellationToken cancellationToken = default);
     }
 }
