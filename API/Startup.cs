@@ -1,6 +1,8 @@
+using Application.Handlers.Customers.Commands.AddCustomer;
 using Application.Services.Customers;
 using Database.Configurations;
 using Database.Repositories.Customers;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -28,6 +30,8 @@ namespace API
             {
                 options.UseSqlServer(Configuration.GetConnectionString("StoreContext"));
             });
+
+            services.AddMediatR(typeof(AddCustomerRequest).Assembly);
 
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();

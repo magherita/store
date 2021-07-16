@@ -1,10 +1,6 @@
-﻿using Application.Models.Customers;
-using Application.Services.Customers;
+﻿using Application.Handlers.Customers.Commands.AddCustomer;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -15,59 +11,60 @@ namespace API.Controllers
     [ApiController]
     public class CustomersController : ControllerBase
     {
-        private readonly ICustomerService _customerService;
+        private readonly IMediator _mediator;
 
-        public CustomersController(ICustomerService customerService)
+        public CustomersController(IMediator mediator)
         {
-            _customerService = customerService;
+            _mediator = mediator;
         }
 
         [HttpPost]
-        public async Task<ActionResult<CustomerModel>> PostAsync([FromBody] AddCustomerModel payload)
+        public async Task<ActionResult<AddCustomerResponse>> PostAsync(
+            [FromBody] AddCustomerRequest payload)
         {
-            var model = await _customerService.AddCustomerAsync(payload);
+            var response = await _mediator.Send(payload);
             
             return CreatedAtRoute(
-                routeValues: new { id = model.Id },
-                value: model);
+                routeValues: new { id = response.Id },
+                value: response);
         }
 
-        [HttpGet("{customerId:Guid}")]
-        public async Task<ActionResult<CustomerModel>> GetAsync([FromRoute] Guid customerId)
-        {
-            var model = await _customerService.GetCustomerAsync(customerId);
+        //[HttpGet("{customerId:Guid}")]
+        //public async Task<ActionResult<CustomerModel>> GetAsync([FromRoute] Guid customerId)
+        //{
+        //    var model = await _customerService.GetCustomerAsync(customerId);
 
-            return Ok(model);
-        }
+        //    return Ok(model);
+        //}
 
-        [HttpGet]
-        public async Task<ActionResult<List<CustomerModel>>> GetAsync()
-        {
-            var models = await _customerService.GetCustomerListAsync();
+        //[HttpGet]
+        //public async Task<ActionResult<List<CustomerModel>>> GetAsync()
+        //{
+        //    var models = await _customerService.GetCustomerListAsync();
 
-            return Ok(models);
-        }
+        //    return Ok(models);
+        //}
 
-        [HttpPut("{customerId:Guid}")]
-        public async Task<ActionResult<CustomerModel>> PutAsync(
-            [FromRoute] Guid customerId,
-            [FromBody] UpdateCustomerModel payload)
-        {
-            payload.Id = customerId;
+        //[HttpPut("{customerId:Guid}")]
+        //public async Task<ActionResult<CustomerModel>> PutAsync(
+        //    [FromRoute] Guid customerId,
+        //    [FromBody] UpdateCustomerModel payload)
+        //{
+        //    payload.Id = customerId;
 
-            var model = await _customerService.UpdateCustomerAsync(payload);
+        //    var model = await _customerService.UpdateCustomerAsync(payload);
 
-            return Ok(model);
-        }
+        //    return Ok(model);
+        //}
 
-        [HttpDelete("{customerId:Guid}")]
-        public async Task<ActionResult> DeleteAsync([FromRoute] Guid customerId)
-        {
-            var payload = new DeleteCustomerModel { Id = customerId };
+        //[HttpDelete("{customerId:Guid}")]
+        //public async Task<ActionResult> DeleteAsync([FromRoute] Guid customerId)
+        //{
+        //    var payload = new DeleteCustomerModel { Id = customerId };
 
-            await _customerService.DeleteCustomerAsync(payload);
+        //    await _customerService.DeleteCustomerAsync(payload);
 
-            return Ok();
-        }
+        //    return Ok();
+        //}
     }
 }
