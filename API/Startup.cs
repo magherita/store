@@ -1,3 +1,4 @@
+using Application.Handlers.CustomerHandlers.Commands.AddCustomer;
 using Application.Mappers.Customers;
 using Application.Models.Customers;
 using Application.Services.Customers;
@@ -8,6 +9,7 @@ using Database.Repositories.Customers;
 using Database.Repositories.Orders;
 using Database.Repositories.Products;
 using FluentValidation.AspNetCore;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -42,6 +44,8 @@ namespace API
             {
                 options.UseSqlServer(Configuration.GetConnectionString("StoreContext"));
             });
+
+            services.AddMediatR(typeof(AddCustomerRequest).Assembly);
 
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();

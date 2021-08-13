@@ -1,5 +1,9 @@
-﻿using Application.Models.Customers;
+﻿using Application.Handlers.CustomerHandlers.Commands.AddCustomer;
+using Application.Handlers.CustomerHandlers.Commands.DeleteCustomer;
+using Application.Handlers.CustomerHandlers.Commands.UpdateCustomer;
+using Application.Models.Customers;
 using Application.Services.Customers;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,68 +15,113 @@ using System.Threading.Tasks;
 
 namespace API.Controllers
 {
+    //********************************************************************************************************/
     [Route("api/[controller]")]
     [ApiController]
     public class CustomersController : ControllerBase
     {
-        private readonly ICustomerService _customerService;
+        private readonly IMediator _mediator;
 
-        public CustomersController(ICustomerService customerService)
+        public CustomersController(IMediator mediator)
         {
-            _customerService = customerService;
+            _mediator = mediator;
         }
+
+
+        [HttpPost]
+        public async Task<ActionResult<AddCustomerResponse>> PostAsync([FromBody] AddCustomerRequest payload)
+        {
+            var response = await _mediator.Send(payload);
+
+            return CreatedAtRoute(
+                routeValues: new { id = response.Id },
+                value: response);
+        }
+
+
+        [HttpDelete("{customerId:Guid}")]
+        public async Task<ActionResult> DeleteAsync([FromRoute] Guid customerId)
+        {
+            var payload = new DeleteCustomerRequest { Id = customerId };
+
+            await _mediator.Send(payload);
+
+            return Ok();
+        }
+
+        [HttpPut("{customerId:Guid}")]
+        public async Task<ActionResult<UpdateCustomerResponse>> PutAsync(
+            [FromRoute] Guid customerId,
+            [FromBody] UpdateCustomerRequest payload)
+        {
+            payload.Id = customerId;
+
+            var response = await _mediator.Send(payload);
+
+
+            return Ok(response);
+        }
+
+        //****************************************************************************************************//
+
+        //private readonly ICustomerService _customerService;
+
+        //public CustomersController(ICustomerService customerService)
+        //{
+        //    _customerService = customerService;
+        //}
 
         /// <summary>
         /// Add an Order
         /// </summary>
         /// <param name="payload"></param>
         /// <returns></returns>
-        [HttpPost]
-        public async Task<ActionResult<CustomerModel>> PostAsync([FromBody] AddCustomerModel payload)
-        {
-            var model = await _customerService.AddCustomerAsync(payload);
-            
-            return CreatedAtRoute(
-                routeValues: new { id = model.Id },
-                value: model);
-        }
+        //[HttpPost]
+        //public async Task<ActionResult<CustomerModel>> PostAsync([FromBody] AddCustomerModel payload)
+        //{
+        //    var model = await _customerService.AddCustomerAsync(payload);
 
-        [HttpGet("{customerId:Guid}")]
-        public async Task<ActionResult<CustomerModel>> GetAsync([FromRoute] Guid customerId)
-        {
-            var model = await _customerService.GetCustomerAsync(customerId);
+        //    return CreatedAtRoute(
+        //        routeValues: new { id = model.Id },
+        //        value: model);
+        //}
 
-            return Ok(model);
-        }
+        //[HttpGet("{customerId:Guid}")]
+        //public async Task<ActionResult<CustomerModel>> GetAsync([FromRoute] Guid customerId)
+        //{
+        //    var model = await _customerService.GetCustomerAsync(customerId);
 
-        [HttpGet]
-        public async Task<ActionResult<List<CustomerModel>>> GetAsync()
-        {
-            var models = await _customerService.GetCustomerListAsync();
+        //    return Ok(model);
+        //}
 
-            return Ok(models);
-        }
- 
-        [HttpPut("{customerId:Guid}")]
-        public async Task<ActionResult<CustomerModel>> PutAsync(
-            [FromRoute] Guid customerId,
-            [FromBody] UpdateCustomerModel payload)
-        {
-            payload.Id = customerId;
+        //[HttpGet]
+        //public async Task<ActionResult<List<CustomerModel>>> GetAsync()
+        //{
+        //    var models = await _customerService.GetCustomerListAsync();
 
-            var model = await _customerService.UpdateCustomerAsync(payload);
+        //    return Ok(models);
+        //}
 
-            return Ok(model);
-        }
+        //[HttpPut("{customerId:Guid}")]
+        //public async Task<ActionResult<CustomerModel>> PutAsync(
+        //    [FromRoute] Guid customerId,
+        //    [FromBody] UpdateCustomerModel payload)
+        //{
+        //    payload.Id = customerId;
 
-        [HttpDelete("{customerId:Guid}")]
-        public async Task<ActionResult> DeleteAsync([FromRoute] Guid customerId)
-        {
-            var payload = new DeleteCustomerModel { Id = customerId };
+        //    var model = await _customerService.UpdateCustomerAsync(payload);
 
-            await _customerService.DeleteCustomerAsync(payload);
+        //    return Ok(model);
+        //}
 
-            return Ok();
-        }
+        //[HttpDelete("{customerId:Guid}")]
+        //public async Task<ActionResult> DeleteAsync([FromRoute] Guid customerId)
+        //{
+        //    var payload = new DeleteCustomerModel { Id = customerId };
+
+        //    await _customerService.DeleteCustomerAsync(payload);
+
+        //    return Ok();
+        //}
     }
 }

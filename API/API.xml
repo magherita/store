@@ -4,12 +4,5 @@
         <name>API</name>
     </assembly>
     <members>
-        <member name="M:API.Controllers.CustomersController.PostAsync(Application.Models.Customers.AddCustomerModel)">
-            <summary>
-            Add an Order
-            </summary>
-            <param name="payload"></param>
-            <returns></returns>
-        </member>
     </members>
 </doc>

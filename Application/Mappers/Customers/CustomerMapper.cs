@@ -1,4 +1,5 @@
-﻿using Application.Models.Customers;
+﻿using Application.Handlers.CustomerHandlers.Queries.GetCustomer;
+using Application.Models.Customers;
 using AutoMapper;
 using Domain.Customers;
 
@@ -10,7 +11,8 @@ namespace Application.Mappers.Customers
         {
             CreateMap<AddCustomerModel, Customer>(MemberList.Source);
             CreateMap<UpdateCustomerModel, Customer>(MemberList.Source);
-            CreateMap<Customer, CustomerModel>(MemberList.Destination);
+            //CreateMap<Customer, CustomerModel>(MemberList.Destination);
+            CreateMap<Customer, GetCustomerListRequest>(MemberList.Destination);
         }
 
     }

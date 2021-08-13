@@ -35,7 +35,10 @@ namespace Database.Repositories.Orders
             _context.SaveChanges();
         }
 
-        
+        public async  Task<Order> RetrieveCustomerOrderAsync(Guid customerId, CancellationToken cancellationToken = default)
+        {
+           return await  _context.Orders.Include(x => x.CustomerId).Include(x => x.LineItems).FirstOrDefaultAsync(x => x.CustomerId == customerId, cancellationToken);
+        }
 
         public async Task<Order> RetrieveOrderAsync(Guid id, CancellationToken cancellationToken = default)
         {

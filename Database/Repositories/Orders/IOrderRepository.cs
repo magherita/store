@@ -14,6 +14,7 @@ namespace Database.Repositories.Orders
         Task CreateOrdersAsync(Order order, CancellationToken cancellationToken = default);
 
         Task<Order> RetrieveOrderAsync(Guid id, CancellationToken cancellationToken = default);
+        Task<Order> RetrieveCustomerOrderAsync(Guid customerId, CancellationToken cancellationToken = default);
 
         Task<List<Order>> RetrieveOrderAsync(CancellationToken cancellationToken = default);
 
